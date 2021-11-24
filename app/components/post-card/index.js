@@ -271,6 +271,7 @@ const TextWithLabel = ({ labelText, bodyText }) => {
 };
 
 const ProjectCardLeftElement = ({ logo, discordId, githubLink }) => {
+  // TODO: pass team specified logo
   return (
     <VStack alignSelf="flex-start" spacing={{ base: "0.5rem" }}>
       <Box position="relative" w="40px" h="40px">
