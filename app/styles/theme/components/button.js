@@ -76,9 +76,10 @@ export const Button = {
     }),
     // TODO: Fix this style, I don't think that's what I want to use
     authThemed: (props) => ({
-      fontWeight: "md",
+      fontWeight: 400,
+      py: "0rem",
+      my: "-0.1rem",
       textTransform: "none",
-      borderRadius: "xl",
       _hover: {
         color:
           props.colorMode === "light"

@@ -1,18 +1,17 @@
 import React from "react";
-import useMeQuery from "../../hooks/useMeQuery";
-import { SearchBar } from "../search-bar";
-import { Box, Flex, HStack, VStack, Center, Heading } from "@chakra-ui/layout";
+import { Box, Flex, HStack, VStack } from "@chakra-ui/layout";
 import { Button, Divider } from "@chakra-ui/react";
-import { IconButton } from "@chakra-ui/button";
-import { useToggle } from "../../hooks/useToggle";
 import { useColorModeSwitcher } from "../../hooks/useColorModeSwitcher";
 import { useColorMode } from "@chakra-ui/color-mode";
 import { VerticalLink } from "../styled-link/vertical-link";
 import { StyledLink } from "../styled-link/styled-link";
 import { useUserStore } from "../../context/useUserStore";
 import chinguLogo from "../image/chingu-logo-small.png";
-import menuIcon from "../image/Vector.png";
 import Image from "next/image";
+
+// updated imports
+import { SubMenu } from "./sub-nav";
+import { MenuButton } from "../navbar-menu-button";
 
 // test hover menu
 import { HoverDropDown } from "../hover-dropdown";
@@ -36,8 +35,8 @@ function Navbar({ isOpen, toggleIsOpen }) {
   return (
     <Box
       as="nav"
-      p="1rem"
-      mb={isOpen ? { base: "1rem" } : { base: "2.5rem", lg: ".3rem" }}
+      boxShadow="sm"
+      mb={isOpen ? { base: "1rem" } : { base: "2rem", lg: "3rem" }}
     >
       <Flex
         justify="space-between"
@@ -46,16 +45,26 @@ function Navbar({ isOpen, toggleIsOpen }) {
       >
         <Image src={chinguLogo} alt="Chingu Logo" width="160px" height="55px" />
 
-        <MenuButton toggleIsOpen={toggleIsOpen} />
-
         <HStack spacing={{ base: 0, md: 8 }}>
           <Flex align="center" as="ul" display={{ base: "none", lg: "flex" }}>
+            <StyledLink
+              href="/"
+              fontSize={{ base: "none", lg: "1.2rem" }}
+              px={{ base: 4, lg: 0 }}
+              pb={{ base: 4, lg: 0 }}
+              variant="noStyle"
+            >
+              Home
+            </StyledLink>
             <HoverDropDown href="/discover" title="Discover" variant="noStyle">
-              <VerticalLink href="/teams" variant="noStyle">
-                Teams
-              </VerticalLink>
               <VerticalLink href="/about" variant="noStyle">
                 About
+              </VerticalLink>
+              <VerticalLink href="/howitworks" variant="noStyle">
+                Apply
+              </VerticalLink>
+              <VerticalLink href="/pricing" variant="noStyle">
+                Pricing
               </VerticalLink>
             </HoverDropDown>
             {/* Resources Routes */}
@@ -74,41 +83,37 @@ function Navbar({ isOpen, toggleIsOpen }) {
             {/* Display Log In / Log Out based on authentication */}
             {context.session ? (
               <Button
-                onClick={logoutHandler}
+                aria-label="Log Out"
                 type="auth"
                 variant="authThemed"
+                fontSize={{ base: "none", lg: "1.2rem" }}
                 w="100%"
-                fontSize={18}
-                mb={3}
+                pb={{ base: 4, lg: 0 }}
+                onClick={logoutHandler}
               >
                 +Log Out+
               </Button>
             ) : (
               <Button
+                aria-label="Log In"
                 type="auth"
                 variant="authThemed"
+                fontSize={{ base: "none", lg: "1.2rem" }}
                 w="100%"
-                onClick={loginHandler}
-                fontSize={18}
+                pb={{ base: 4, lg: 0 }}
                 mb={3}
+                onClick={loginHandler}
               >
                 +Log In+
               </Button>
             )}
           </Flex>
-          <HStack display={{ lg: "none" }} _hover={{ cursor: "pointer" }}>
-            <Image
-              src={menuIcon}
-              alt="Menu"
-              width="39px"
-              height="26px"
-              onClick={toggleIsOpen}
-            />
-          </HStack>
+          <MenuButton isOpen={isOpen} toggleIsOpen={toggleIsOpen} />
         </HStack>
       </Flex>
       {context.session && (
         <VStack
+          display={isOpen ? "none" : "visible"}
           mt={10}
           justifyContent="flex-start"
           alignItems="flex-start"
@@ -124,90 +129,5 @@ function Navbar({ isOpen, toggleIsOpen }) {
   );
 }
 
-function MobileNavMenu() {
-  return (
-    <VStack spacing={4} w="100%">
-      <VStack as="ul" my={8} p={4} spacing={8} w="100%">
-        <VerticalLink href="/" spacing={4} variant="large">
-          Home
-        </VerticalLink>
-        <VerticalLink href="/about" spacing={4} variant="large">
-          About
-        </VerticalLink>
-        <VerticalLink href="/teams" spacing={4} variant="large">
-          Teams
-        </VerticalLink>
-        <VerticalLink href="/projects" spacing={4} variant="large">
-          Projects
-        </VerticalLink>
-        <VerticalLink href="/contact" spacing={4} variant="large">
-          Contact us
-        </VerticalLink>
-        <VerticalLink href="/support" spacing={4} variant="large">
-          Support
-        </VerticalLink>
-      </VStack>
-    </VStack>
-  );
-}
-
-function SubMenu() {
-  const { session } = useUserStore();
-  const { data, error, refetch, status } = useMeQuery();
-  // Set up listener to refetch the data if the session changes
-  React.useEffect(() => {
-    if (session) refetch();
-  }, [session]);
-
-  return (
-    <>
-      <HStack spacing={{ base: 0, md: 8 }} fontSize={22}>
-        <Flex align="center" display={{ base: "flex", lg: "flex" }} as="ul">
-          <StyledLink
-            variant="noStyle"
-            href={
-              data ? `/activity/${encodeURIComponent(data.user.id)}` : "null"
-            }
-          >
-            Activity
-          </StyledLink>
-          <StyledLink
-            variant="noStyle"
-            href={
-              data ? `/profile/${encodeURIComponent(data.user.id)}` : "null"
-            }
-          >
-            Profile
-          </StyledLink>
-          <StyledLink variant="noStyle" href="/settings">
-            Settings
-          </StyledLink>
-        </Flex>
-      </HStack>
-    </>
-  );
-}
-
-function MenuButton({ toggleIsOpen, ...props }) {
-  const [clicked, toggleClicked] = useToggle();
-
-  const handleClick = () => {
-    toggleIsOpen();
-    toggleClicked();
-  };
-  return (
-    <IconButton
-      {...props}
-      _hover={{ variant: "ghost" }}
-      borderRadius="sm"
-      display={{ base: "block", lg: "none" }}
-      h="48px"
-      onClick={handleClick}
-      variant="ghost"
-      w="48px"
-      icon
-    />
-  );
-}
-
-export { Navbar, MobileNavMenu };
+export { Navbar };
+export { MobileNavMenu } from "./mobile";

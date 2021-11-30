@@ -7,8 +7,10 @@ function VerticalLink({ children, href, ...props }) {
   const { colorGrey } = useColorModeSwitcher();
   return (
     <VStack
-      align="start"
       as="li"
+      align="left"
+      fontSize="1rem"
+      aria-labelledby={children}
       borderBottom={{ base: "1px solid", lg: "none" }}
       borderColor={colorGrey}
       listStyleType="none"

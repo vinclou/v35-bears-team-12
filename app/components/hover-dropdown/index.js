@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 import React from "react";
 import { MotionBox } from "../motion-box";
+import { Box } from "@chakra-ui/layout";
 import { useColorModeSwitcher } from "../../hooks/useColorModeSwitcher";
 import { StyledLink } from "../styled-link/styled-link";
 
@@ -38,13 +39,15 @@ function HoverDropDown({ children, href, title, ...props }) {
   };
   return (
     <MotionBox
+      as="li"
       align="start"
-      fontSize={20}
-      borderBottom={{ base: "1px solid", lg: "none" }}
+      listStyleType="none"
+      fontSize={{ base: "none", lg: "1.2rem" }}
       borderColor={colorGrey}
+      borderBottom={{ base: "1px solid", lg: "none" }}
       onHoverEnd={toggleHoverMenu}
       onHoverStart={toggleHoverMenu}
-      pb={{ base: 4, lg: 3 }}
+      pb={{ base: 4, lg: 0 }}
       w="100%"
     >
       {/* <a href="/">Drop</a> */}
@@ -57,7 +60,7 @@ function HoverDropDown({ children, href, title, ...props }) {
         h="100%"
         initial="exit"
         position="absolute"
-        top="60px"
+        top="65px"
         variants={subMenuAnimate}
       >
         {children}
