@@ -21,8 +21,15 @@ export default function ProfilePage() {
     <Container title="Profile | Chingu Board">
       <ContentWrapper>
         <Heading as="h2" textAlign="center" variant="h2">
-          Profile fetch the name of the user
+          Avatar Place Holder && {data.user.name}
         </Heading>
+        <Heading as="h2" textAlign="center" variant="h2">
+          Social Links
+        </Heading>
+        <Heading as="h2" textAlign="center" variant="h2">
+          Bio
+        </Heading>
+        <Heading>GitHub Activity & Discord Activity & Chingu Status</Heading>
       </ContentWrapper>
     </Container>
   );

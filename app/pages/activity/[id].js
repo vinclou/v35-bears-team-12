@@ -24,6 +24,18 @@ export default function ActivityPage() {
         <Heading as="h2" textAlign="center" variant="h2">
           My Activity
         </Heading>
+        <Heading as="h2" textAlign="center" variant="h2">
+          My Teams
+        </Heading>
+        <Heading as="h2" textAlign="center" variant="h2">
+          My Projects
+        </Heading>
+        <Heading as="h2" textAlign="center" variant="h2">
+          My Tasks & Achievements
+        </Heading>
+        <Heading as="h2" textAlign="center" variant="h2">
+          Pending Invites
+        </Heading>
       </ContentWrapper>
     </Container>
   );

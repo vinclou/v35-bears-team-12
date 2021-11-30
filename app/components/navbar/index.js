@@ -120,27 +120,6 @@ function Navbar({ isOpen, toggleIsOpen }) {
           <Divider w="260px" bg="neutral.700" />
         </VStack>
       )}
-      <Center p={2}>
-        <SearchBar />
-        <Button
-          aria-label="Add query labels to your search"
-          // variant="primary"
-          type="submit"
-          border="none"
-          m={2}
-          h="inherit"
-          variant="primaryThemed"
-          bg="primary.700"
-          color="accent.simpleWhite"
-          w="5rem"
-          onClick={loginHandler}
-          // fontSize={13}
-          textTransform="none"
-          letterSpacing="0.5px"
-        >
-          + Labels
-        </Button>
-      </Center>
     </Box>
   );
 }

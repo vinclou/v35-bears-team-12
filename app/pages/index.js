@@ -12,7 +12,8 @@ import { dehydrate, useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import { Container } from "../layouts/container";
 import { ContentWrapper } from "../layouts/content-wrapper";
-import { Box, Badge, Text, Spinner } from "@chakra-ui/react";
+import { Box, Badge, Button, Text, Spinner, Center } from "@chakra-ui/react";
+import { SearchBar } from "../components/search-bar";
 
 export default function Home() {
   const router = useRouter();
@@ -77,13 +78,34 @@ export default function Home() {
   return (
     <Container title="Home Page | Chingu Board">
       <ContentWrapper>
-        {error && <Text>{error.message}</Text>}
-        {status === "loading" ? (
-          <Spinner size="lg" />
-        ) : (
-          <>
-            <Box>
-              <Badge mt="-3rem" mx="2rem" variant="secondary">
+        <Box>
+          <Center p={2}>
+            <SearchBar />
+            <Button
+              aria-label="Add query labels to your search"
+              // variant="primary"
+              type="submit"
+              border="none"
+              m={2}
+              h="inherit"
+              variant="primaryThemed"
+              bg="primary.700"
+              color="accent.simpleWhite"
+              w="5rem"
+              // onClick={loginHandler}
+              // fontSize={13}
+              textTransform="none"
+              letterSpacing="0.5px"
+            >
+              + Labels
+            </Button>
+          </Center>
+          {error && <Text>{error.message}</Text>}
+          {status === "loading" ? (
+            <Spinner size="lg" />
+          ) : (
+            <>
+              <Badge mx="2rem" variant="secondary">
                 Items found: {data.pages[0].count}
               </Badge>
               {/* Map the data */}
@@ -102,11 +124,11 @@ export default function Home() {
                   );
                 })}
               {/* Fix the style center the element */}
-            </Box>
-            {isFetchingNextPage ? <Spinner size="lg" /> : null}
-          </>
-        )}
 
+              {isFetchingNextPage ? <Spinner size="lg" /> : null}
+            </>
+          )}
+        </Box>
         {/* Determines if the next page needs to be fetched  */}
         <span style={{ visibility: "hidden" }} ref={ref}>
           intersection observer marker
