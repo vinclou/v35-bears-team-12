@@ -1,4 +1,5 @@
 import React from "react";
+import useMeQuery from "../../hooks/useMeQuery";
 import { SearchBar } from "../search-bar";
 import { Box, Flex, HStack, VStack, Center, Heading } from "@chakra-ui/layout";
 import { Button, Divider } from "@chakra-ui/react";
@@ -25,8 +26,9 @@ function Navbar({ isOpen, toggleIsOpen }) {
   const logoutHandler = (event) => {
     event.preventDefault();
     context.signOut();
+    // TODO: delete the cache of useMeQuery
   };
-  const loginHandler = (event) => {
+  const loginHandler = async (event) => {
     event.preventDefault();
     context.signIn();
   };
@@ -171,14 +173,31 @@ function MobileNavMenu() {
 }
 
 function SubMenu() {
+  const { session } = useUserStore();
+  const { data, error, refetch, status } = useMeQuery();
+  // Set up listener to refetch the data if the session changes
+  React.useEffect(() => {
+    if (session) refetch();
+  }, [session]);
+
   return (
     <>
       <HStack spacing={{ base: 0, md: 8 }} fontSize={22}>
         <Flex align="center" display={{ base: "flex", lg: "flex" }} as="ul">
-          <StyledLink variant="noStyle" href="/:user/activity">
+          <StyledLink
+            variant="noStyle"
+            href={
+              data ? `/activity/${encodeURIComponent(data.user.id)}` : "null"
+            }
+          >
             Activity
           </StyledLink>
-          <StyledLink variant="noStyle" href="/:user/profile">
+          <StyledLink
+            variant="noStyle"
+            href={
+              data ? `/profile/${encodeURIComponent(data.user.id)}` : "null"
+            }
+          >
             Profile
           </StyledLink>
           <StyledLink variant="noStyle" href="/settings">

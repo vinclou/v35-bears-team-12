@@ -1,20 +1,25 @@
 import prisma from "../../lib/prisma";
+import { getSession } from "next-auth/client";
 /*
   Fetch the current user's profile
-  Only GET is allowed here -> ?
+  Only GET is allowed here ->
 */
 export default async function meHandler(req, res) {
-  const {
-    query: { token },
-    method,
-  } = req;
+  const session = await getSession({ req });
+  // if there is no session, send 401
+  if (!session) {
+    res.status(401).send("Not authenticated");
+    return;
+  }
+
+  const { method } = req;
 
   switch (method) {
     case "GET":
       try {
         const me = await prisma.session.findUnique({
           where: {
-            accessToken: token,
+            accessToken: session.accessToken,
           },
           select: {
             user: {

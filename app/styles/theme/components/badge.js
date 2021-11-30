@@ -46,6 +46,21 @@ export const Badge = {
         color: "neutral.200",
       },
     }),
+    secondary: (props) => ({
+      bg: "default.light",
+      borderRadius: "3px",
+      color:
+        props.colorMode === "light" ? "neutral.700" : "accent.electricBlue",
+      boxShadow: "md",
+      _active: {
+        bg: "default.dark",
+        color: "default.light",
+      },
+      _disabled: {
+        borderColor: "neutral.200",
+        color: "neutral.200",
+      },
+    }),
   },
   // The default `size` or `variant` values
   defaultProps: {
