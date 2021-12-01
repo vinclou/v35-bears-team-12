@@ -4,6 +4,8 @@ import {
   InputGroup,
   InputLeftElement,
   IconButton,
+  Button,
+  Flex,
 } from "@chakra-ui/react";
 import { SearchIcon } from "../icons/search-icon";
 import { useForm } from "react-hook-form";
@@ -45,35 +47,56 @@ function SearchBar() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <InputGroup size="md" w={{ base: "20rem", md: "40rem" }}>
-        <InputLeftElement>
-          <IconButton
-            aria-label="search"
+    <Flex p={{ base: "0.5rem", lg: "1rem" }} flexWrap="wrap">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <InputGroup size="md" w={{ base: "20rem", sm: "30rem", md: "40rem" }}>
+          <InputLeftElement>
+            <IconButton
+              aria-label="search"
+              borderRadius="4px"
+              variant="unstyled"
+              type="submit"
+              isLoading={isSubmitting}
+              icon={<SearchIcon />}
+            />
+          </InputLeftElement>
+          <Input
+            bg="accent.simpleWhite"
             borderRadius="4px"
-            variant="unstyled"
-            type="submit"
-            isLoading={isSubmitting}
-            icon={<SearchIcon />}
+            placeholder="Search"
+            type="text"
+            {...register("search", {
+              minLength: 1,
+              maxLength: 20,
+            })}
           />
-        </InputLeftElement>
-        <Input
-          bg="accent.simpleWhite"
-          borderRadius="4px"
-          placeholder="Search"
-          type="text"
-          {...register("search", {
-            minLength: 1,
-            maxLength: 20,
-          })}
-        />
-        {errors.search && (
-          <Text color="red" variant="small">
-            {errors.search.message}
-          </Text>
-        )}
-      </InputGroup>
-    </form>
+          {errors.search && (
+            <Text color="red" variant="small">
+              {errors.search.message}
+            </Text>
+          )}
+        </InputGroup>
+        <Button
+          aria-label="Add query labels to your search"
+          h="inherit"
+          w="auto"
+          ml={1}
+          bg="primary.700"
+          // border="none"
+          borderColor="none"
+          borderRadius="lg"
+          variant="primaryThemed"
+          type="submit"
+          color="accent.simpleWhite"
+          textTransform="none"
+          letterSpacing="0.5px"
+          // onClick={pickLabelsHandler}
+          // fontSize={13}
+        >
+          + Filters
+        </Button>
+      </form>
+    </Flex>
   );
 }
 

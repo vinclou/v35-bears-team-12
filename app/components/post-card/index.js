@@ -214,18 +214,15 @@ const MobileProjectCard = ({
         base: "360px",
         sm: "380px",
       }}
-      bgColor="accent.simpleWhite"
       boxShadow="lg"
-      // h={{
-      //   base: "150px",
-      // }}
+      bgColor="accent.simpleWhite"
       borderLeftColor="secondary.600"
       borderBottomColor="complimentary.300"
       borderRadius="4px"
       borderLeftWidth={3}
       borderBottomWidth={3}
-      mx="0rem"
-      mb="1rem"
+      mx="auto"
+      mb="1.3rem"
     >
       <HStack spacing="1rem" w="inherit" p={{ base: "1rem", "2xl": "2rem" }}>
         <ProjectCardLeftElement

@@ -3,8 +3,8 @@
   Set up bi-directional infinite scroll, right now it's only forward.
 */
 import React, { useEffect } from "react";
-import { useRouter } from "next/router";
 import axios from "axios";
+import { useRouter } from "next/router";
 import queryClient from "../lib/react-query";
 import ProjectCard from "../components/post-card";
 import { useMediaQuerySSR } from "../hooks/useMediaQuerySsr";
@@ -12,13 +12,15 @@ import { dehydrate, useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import { Container } from "../layouts/container";
 import { ContentWrapper } from "../layouts/content-wrapper";
-import { Box, Badge, Button, Text, Spinner, Center } from "@chakra-ui/react";
+import { Box, Badge, Flex, Text } from "@chakra-ui/layout";
+import { Spinner } from "@chakra-ui/spinner";
 import { SearchBar } from "../components/search-bar";
+import { useToggle } from "../hooks/useToggle";
 
 export default function Home() {
   const router = useRouter();
-  const [isMobile] = useMediaQuerySSR("(max-width: 620px)");
   const { ref, inView } = useInView();
+  const [isMobile] = useMediaQuerySSR("(max-width: 620px)");
 
   /* Refresh Data alongside server side props */
   const refreshData = () => {
@@ -79,27 +81,9 @@ export default function Home() {
     <Container title="Home Page | Chingu Board">
       <ContentWrapper>
         <Box>
-          <Center p={2}>
-            <SearchBar />
-            <Button
-              aria-label="Add query labels to your search"
-              // variant="primary"
-              type="submit"
-              border="none"
-              m={2}
-              h="inherit"
-              variant="primaryThemed"
-              bg="primary.700"
-              color="accent.simpleWhite"
-              w="5rem"
-              // onClick={loginHandler}
-              // fontSize={13}
-              textTransform="none"
-              letterSpacing="0.5px"
-            >
-              + Labels
-            </Button>
-          </Center>
+          {/* TODO: Move Flex Container To Search Bar File */}
+          <SearchBar />
+
           {error && <Text>{error.message}</Text>}
           {status === "loading" ? (
             <Spinner size="lg" />
