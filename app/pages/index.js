@@ -12,7 +12,7 @@ import { dehydrate, useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import { Container } from "../layouts/container";
 import { ContentWrapper } from "../layouts/content-wrapper";
-import { Box, Badge, Flex, Text } from "@chakra-ui/layout";
+import { Box, Badge, VStack, Text } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/spinner";
 import { SearchBar } from "../components/search-bar";
 import { useToggle } from "../hooks/useToggle";
@@ -80,7 +80,7 @@ export default function Home() {
   return (
     <Container title="Home Page | Chingu Board">
       <ContentWrapper>
-        <Box>
+        <VStack as="section">
           {/* TODO: Move Flex Container To Search Bar File */}
           <SearchBar />
 
@@ -112,7 +112,7 @@ export default function Home() {
               {isFetchingNextPage ? <Spinner size="lg" /> : null}
             </>
           )}
-        </Box>
+        </VStack>
         {/* Determines if the next page needs to be fetched  */}
         <span style={{ visibility: "hidden" }} ref={ref}>
           intersection observer marker

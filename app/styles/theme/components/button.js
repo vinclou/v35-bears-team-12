@@ -4,6 +4,10 @@ export const Button = {
     fontWeight: "bold",
     textTransform: "uppercase",
     borderRadius: "sm",
+    _focus: {
+      border: "0.5px solid",
+      borderColor: "#BDD4F8",
+    },
   },
   // Styles for the size variations
   sizes: {
@@ -58,12 +62,11 @@ export const Button = {
       },
     }),
     primaryThemed: (props) => ({
-      border: "1px solid",
-      borderColor:
-        props.colorMode === "light" ? "primary.500" : "secondary.300",
-      color: props.colorMode === "light" ? "primary.500" : "secondary.300",
+      // border: "0.5px solid",
+      // borderColor: props.colorMode === "light" ? "neutral.100" : "neutral.300",
+      color: props.colorMode === "light" ? "primary.700" : "secondary.300",
       _hover: {
-        bg: props.colorMode === "light" ? "primary.600" : "secondary.400",
+        bg: props.colorMode === "light" ? "primary.700" : "secondary.400",
         color: props.colorMode === "light" ? "default.light" : "default.dark",
       },
     }),

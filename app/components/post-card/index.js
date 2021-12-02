@@ -104,7 +104,7 @@ const ProjectCard = ({ isMobile, project }) => {
         boxShadow="lg"
         // borderColor={colorGrey}
         borderLeftColor="secondary.600"
-        borderBottomColor="complimentary.300"
+        borderBottomColor="complimentary.500"
         borderRadius="4px"
         borderLeftWidth={3}
         borderBottomWidth={3}
@@ -133,9 +133,9 @@ const ProjectCard = ({ isMobile, project }) => {
         // borderColor={colorGrey}
         boxShadow="lg"
         bgColor="accent.simpleWhite"
-        borderColor="primary.600"
+        borderColor="accent.bluishWhite"
         borderRadius="4px"
-        borderBottomWidth={3}
+        borderBottomWidth={7}
         data={team}
         isVisible={isExpanded}
       >
@@ -211,8 +211,8 @@ const MobileProjectCard = ({
     <Box
       as="section"
       w={{
-        base: "360px",
-        sm: "380px",
+        base: "320px",
+        sm: "440px",
       }}
       boxShadow="lg"
       bgColor="accent.simpleWhite"

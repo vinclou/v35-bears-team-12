@@ -25,14 +25,15 @@ const MenuButton = ({ isOpen, toggleIsOpen, ...props }) => {
   };
   return (
     <IconButton
-      alt="Menu"
+      alt="Navigation Menu"
+      aria-label="Navigation Menu"
       ref={inputRef}
       borderRadius="sm"
       variant="ghost"
       onClick={handleClick}
       display={{ base: "block", lg: "none" }}
-      w="48px"
-      h="48px"
+      w="50px"
+      h="50px"
       icon={<MenuIcon clicked={clicked} />}
       _hover={{ variant: "ghost" }}
       {...props}
@@ -47,7 +48,7 @@ const MenuIcon = ({ clicked }) => {
       <Line
         bg={colorDark}
         width={clicked ? "1px" : "19px"}
-        top={clicked ? "1px" : "4px"}
+        top={clicked ? "1px" : "6px"}
         left={clicked ? "1px" : "25px"}
         opacity={clicked ? "0" : "1"}
         transition={clicked ? "opacity 1s ease;" : "none"}
@@ -62,7 +63,7 @@ const MenuIcon = ({ clicked }) => {
       <Line
         bg={colorDark}
         width={clicked ? "32px" : "19px"}
-        bottom={clicked ? "22px" : "16px"}
+        bottom={clicked ? "22px" : "19px"}
         left={clicked ? "8px" : "4px"}
         transform={clicked ? "rotate(-45deg)" : "none"}
       />

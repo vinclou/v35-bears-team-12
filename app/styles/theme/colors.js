@@ -28,6 +28,7 @@ export const colors = {
     700: "#18A999",
   },
   // Creates Contrast with the Spanish Green
+  // Should ve given another name, too much contrast with this color
   complimentary: {
     100: "#EC4EAB",
     200: "#EA38A0",
@@ -49,6 +50,7 @@ export const colors = {
   },
   accent: {
     simpleWhite: "#FFFFFF",
+    bluishWhite: "#EEF6F6",
     electricBlue: "#18A999",
     successLight: "#68D391",
     successDark: "#276749",

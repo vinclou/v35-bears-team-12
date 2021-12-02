@@ -5,6 +5,7 @@ import { Heading, Text, fonts, textStyles } from "./typography";
 import { Button } from "./components/button";
 import { Link } from "./components/link";
 import { Badge } from "./components/badge";
+import { Input } from "./components/input";
 
 const overrides = {
   styles,
@@ -14,6 +15,7 @@ const overrides = {
   components: {
     Badge,
     Button,
+    Input,
     Heading,
     Text,
     Link,

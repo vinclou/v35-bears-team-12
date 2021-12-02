@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Box, Flex, HStack, VStack } from "@chakra-ui/layout";
 import { Button, Divider } from "@chakra-ui/react";
 import { useColorModeSwitcher } from "../../hooks/useColorModeSwitcher";
@@ -6,8 +7,6 @@ import { useColorMode } from "@chakra-ui/color-mode";
 import { VerticalLink } from "../styled-link/vertical-link";
 import { StyledLink } from "../styled-link/styled-link";
 import { useUserStore } from "../../context/useUserStore";
-import chinguLogo from "../image/chingu-logo-small.png";
-import Image from "next/image";
 
 // updated imports
 import { SubMenu } from "./sub-nav";
@@ -35,24 +34,38 @@ function Navbar({ isOpen, toggleIsOpen }) {
   return (
     <Box
       as="nav"
-      boxShadow="sm"
-      mb={isOpen ? { base: "1rem" } : { base: "2rem", lg: "3rem" }}
+      bg="#F6EEEE"
+      mb={isOpen ? { base: "0.1rem" } : { base: "0.1rem", lg: "0.2rem" }}
+      px={{ base: "1rem", lg: "2rem" }}
+      py={{ base: "1rem", lg: "1.5rem" }}
     >
       <Flex
         justify="space-between"
-        mb={isOpen ? { base: "1rem" } : { base: "2.5rem", lg: ".3rem" }}
-        p="4"
+        mb={isOpen ? { base: "1rem" } : { base: "2.5rem", lg: "3.5rem" }}
       >
-        <Image src={chinguLogo} alt="Chingu Logo" width="160px" height="55px" />
+        <Image
+          src="/chingu-logo-small.png"
+          alt="Chingu Logo"
+          width="160px"
+          height="55px"
+        />
 
-        <HStack spacing={{ base: 0, md: 8 }}>
-          <Flex align="center" as="ul" display={{ base: "none", lg: "flex" }}>
+        <HStack spacing={{ base: 0, md: 4 }}>
+          <HStack
+            align="center"
+            as="ul"
+            display={{ base: "none", lg: "flex" }}
+            spacing="0.5rem"
+          >
             <StyledLink
+              as="ul"
+              listStyleType="none"
               href="/"
               fontSize={{ base: "none", lg: "1.2rem" }}
-              px={{ base: 4, lg: 0 }}
+              px={{ base: 4, lg: 1.5 }}
               pb={{ base: 4, lg: 0 }}
               variant="noStyle"
+              lineHeight="center"
             >
               Home
             </StyledLink>
@@ -73,11 +86,14 @@ function Navbar({ isOpen, toggleIsOpen }) {
               title="Resources"
               variant="noStyle"
             >
-              <VerticalLink href="/contact" variant="noStyle">
-                Contact Us
+              <VerticalLink href="/docs" variant="noStyle">
+                Docs
               </VerticalLink>
               <VerticalLink href="/support" variant="noStyle">
                 Support
+              </VerticalLink>
+              <VerticalLink href="/contact" variant="noStyle">
+                Contact Us
               </VerticalLink>
             </HoverDropDown>
             {/* Display Log In / Log Out based on authentication */}
@@ -85,10 +101,13 @@ function Navbar({ isOpen, toggleIsOpen }) {
               <Button
                 aria-label="Log Out"
                 type="auth"
+                position="relative"
                 variant="authThemed"
                 fontSize={{ base: "none", lg: "1.2rem" }}
                 w="100%"
+                px={{ base: 4, lg: 6 }}
                 pb={{ base: 4, lg: 0 }}
+                mb={1.4}
                 onClick={logoutHandler}
               >
                 +Log Out+
@@ -97,17 +116,19 @@ function Navbar({ isOpen, toggleIsOpen }) {
               <Button
                 aria-label="Log In"
                 type="auth"
+                position="relative"
                 variant="authThemed"
                 fontSize={{ base: "none", lg: "1.2rem" }}
                 w="100%"
+                px={{ base: 4, lg: 6 }}
                 pb={{ base: 4, lg: 0 }}
-                mb={3}
+                mb={1.4}
                 onClick={loginHandler}
               >
                 +Log In+
               </Button>
             )}
-          </Flex>
+          </HStack>
           <MenuButton isOpen={isOpen} toggleIsOpen={toggleIsOpen} />
         </HStack>
       </Flex>
@@ -115,14 +136,13 @@ function Navbar({ isOpen, toggleIsOpen }) {
         <VStack
           display={isOpen ? "none" : "visible"}
           mt={10}
-          justifyContent="flex-start"
-          alignItems="flex-start"
-          spacing={{ base: "0.1rem", lg: "0.2rem" }}
+          spacing={{ base: "0.1rem", lg: "0.1rem" }}
+          px={{ base: "1rem", lg: "2rem" }}
           mb="0.1rem"
-          ml="2rem"
+          // ml="2rem"
         >
           <SubMenu />
-          <Divider w="260px" bg="neutral.700" />
+          <Divider alignSelf="center" bg="neutral.100" />
         </VStack>
       )}
     </Box>

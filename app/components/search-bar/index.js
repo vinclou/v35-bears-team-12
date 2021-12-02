@@ -7,7 +7,8 @@ import {
   Button,
   Flex,
 } from "@chakra-ui/react";
-import { SearchIcon } from "../icons/search-icon";
+import { FilterButton } from "../filter-button";
+import { FaSearch } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useColorModeSwitcher } from "../../hooks/useColorModeSwitcher";
 
@@ -47,24 +48,30 @@ function SearchBar() {
   };
 
   return (
-    <Flex p={{ base: "0.5rem", lg: "1rem" }} flexWrap="wrap">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <InputGroup size="md" w={{ base: "20rem", sm: "30rem", md: "40rem" }}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Flex
+        p={{ base: "0.5rem", lg: "1rem" }}
+        w={{ base: "21rem", sm: "31rem", md: "40rem", lg: "50rem" }}
+      >
+        <InputGroup>
           <InputLeftElement>
             <IconButton
-              aria-label="search"
+              aria-label="search field button"
               borderRadius="4px"
+              size="xl"
               variant="unstyled"
               type="submit"
               isLoading={isSubmitting}
-              icon={<SearchIcon />}
+              icon={<FaSearch />}
             />
           </InputLeftElement>
           <Input
+            aria-label="search field"
             bg="accent.simpleWhite"
             borderRadius="4px"
-            placeholder="Search"
             type="text"
+            placeholder="Search"
+            variant="search"
             {...register("search", {
               minLength: 1,
               maxLength: 20,
@@ -76,27 +83,11 @@ function SearchBar() {
             </Text>
           )}
         </InputGroup>
-        <Button
-          aria-label="Add query labels to your search"
-          h="inherit"
-          w="auto"
-          ml={1}
-          bg="primary.700"
-          // border="none"
-          borderColor="none"
-          borderRadius="lg"
-          variant="primaryThemed"
-          type="submit"
-          color="accent.simpleWhite"
-          textTransform="none"
-          letterSpacing="0.5px"
-          // onClick={pickLabelsHandler}
-          // fontSize={13}
-        >
-          + Filters
-        </Button>
-      </form>
-    </Flex>
+
+        <FilterButton />
+      </Flex>
+      {/* <Input variant="search" /> */}
+    </form>
   );
 }
 

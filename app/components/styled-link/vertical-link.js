@@ -9,7 +9,7 @@ function VerticalLink({ children, href, ...props }) {
     <VStack
       as="li"
       align="left"
-      fontSize="1rem"
+      fontSize="1.1rem"
       aria-labelledby={children}
       borderBottom={{ base: "1px solid", lg: "none" }}
       borderColor={colorGrey}
