@@ -122,25 +122,28 @@ export default function Home() {
   );
 }
 
-async function getPosts(cursor = "") {
-  const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/infinite?cursor=${cursor}`
-  );
-  return res.data;
-}
+// async function getPosts(cursor = "") {
+//   const res = await axios.get(
+//     `${process.env.NEXT_PUBLIC_API_URL}/api/infinite?cursor=${cursor}`
+//   );
+//   return res.data;
+// }
 
-export const getServerSideProps = async ({ query }) => {
-  // query all projects with particular team data relevant to the use case on this page
-  // sorts the data in descending order by the date of creation
-  const cursor = query.cursor ? query.cursor : "";
+// export const getServerSideProps = async ({ query }) => {
+//   // query all projects with particular team data relevant to the use case on this page
+//   // sorts the data in descending order by the date of creation
+//   const cursor = query.cursor ? query.cursor : "";
 
-  await queryClient.prefetchInfiniteQuery(["projects"], getPosts(cursor));
+//   await queryClient.prefetchInfiniteQuery(["projects"], async () => {
+//     const data = await getPosts(cursor);
+//     return JSON.parse(data);
+//   });
 
-  // Those JSON methods can open website to vulnerabilities, look for a way to fix dehydration serialization problem
-  // https://github.com/tannerlinsley/react-query/issues/1458
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-};
+//   // Those JSON methods can open website to vulnerabilities, look for a way to fix dehydration serialization problem
+//   // https://github.com/tannerlinsley/react-query/issues/1458
+//   return {
+//     props: {
+//       dehydratedState: dehydrate(queryClient),
+//     },
+//   };
+// };
